@@ -4,26 +4,26 @@ def log_print(file, *args, **kwargs):
     print(*args, **kwargs)
 
 
-def calculate_s(x1, y1, x2, y2, p, a):
+def calculate_s(x1, y1, x2, y2, p, a, log_file):
     if x1 is None or y1 is None:  # Point at infinity
         return None
     if x2 is None or y2 is None:  # Point at infinity
         return None
     if (x1 == x2) and (y1 == y2):  # Point doubling
-        log_print(logfile, "Point Doubling")
+        log_print(log_file, "Point Doubling")
         numerator = (3 * x1**2 + a) % p
         denominator = (2 * y1) % p
         s = (numerator * pow(denominator, -1, p)) % p  # Modular division
     else:  # Point addition
-        log_print(logfile, "Point Addition")
+        log_print(log_file, "Point Addition")
         numerator = (y2 - y1) % p
         denominator = (x2 - x1) % p
         s = (numerator * pow(denominator, -1, p)) % p  # Modular division
-    log_print(logfile, f"s: {s}")
+    log_print(log_file, f"s: {s}")
     return s
 
 
-def elliptic_curve_point_addition_and_doubling(x1, y1, x2, y2, p, a):
+def elliptic_curve_point_addition_and_doubling(x1, y1, x2, y2, p, a, log_file):
     if x1 is None or y1 is None:  # P1 is the point at infinity
         return x2, y2
     if x2 is None or y2 is None:  # P2 is the point at infinity
@@ -31,7 +31,7 @@ def elliptic_curve_point_addition_and_doubling(x1, y1, x2, y2, p, a):
     if x1 == x2 and (y1 + y2) % p == 0:  # P1 + P2 = Point at infinity
         return None, None
 
-    s = calculate_s(x1, y1, x2, y2, p, a)
+    s = calculate_s(x1, y1, x2, y2, p, a, log_file)
     if s is None:  # Handle division by zero or invalid cases
         return None, None
 
@@ -71,7 +71,7 @@ if __name__ == '__main__':
             log_print(logfile, f"Point X2, Y2: ({hex(point_x2) if point_x2 is not None else 'Infinity'}, "
                                f"{hex(point_y2) if point_y2 is not None else 'Infinity'})")
             x3, y3 = elliptic_curve_point_addition_and_doubling(current_x1, current_y1, point_x2, point_y2,
-                                                                prime_p, parameter_a)
+                                                                prime_p, parameter_a, logfile)
             log_print(logfile, f"Point {i+1}P = Point X3, Y3: ({hex(x3) if x3 is not None else 'Infinity'}, "
                                f"{hex(y3) if y3 is not None else 'Infinity'})")
             current_x1, current_y1 = x3, y3
