@@ -1,19 +1,25 @@
+def log_print(file, *args, **kwargs):
+    print(*args, **kwargs, file=file)
+    # Optionally also print to console:
+    print(*args, **kwargs)
+
+
 def calculate_s(x1, y1, x2, y2, p, a):
     if x1 is None or y1 is None:  # Point at infinity
         return None
     if x2 is None or y2 is None:  # Point at infinity
         return None
     if (x1 == x2) and (y1 == y2):  # Point doubling
-        print("Point Doubling")
+        log_print(logfile, "Point Doubling")
         numerator = (3 * x1**2 + a) % p
         denominator = (2 * y1) % p
         s = (numerator * pow(denominator, -1, p)) % p  # Modular division
     else:  # Point addition
-        print("Point Addition")
+        log_print(logfile, "Point Addition")
         numerator = (y2 - y1) % p
         denominator = (x2 - x1) % p
         s = (numerator * pow(denominator, -1, p)) % p  # Modular division
-    print(f"s: {s}")
+    log_print(logfile, f"s: {s}")
     return s
 
 
@@ -50,20 +56,22 @@ if __name__ == '__main__':
     parameter_a = 0
     prime_p = (2**256) - (2**32) - 977
 
-    print(f"Curve parameter a: {parameter_a}")
-    print(f"Prime p: {prime_p}")
-    current_x1, current_y1 = point_x1, point_y1  # Avoid shadowing
-    print(f"Point P: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
-          f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
+    # Redirect stdout to both console and file
+    with open('assign2-part1.txt', 'w') as logfile:
+        log_print(logfile, f"Curve parameter a: {parameter_a}")
+        log_print(logfile, f"Prime p: {prime_p}")
+        current_x1, current_y1 = point_x1, point_y1  # Avoid shadowing
+        log_print(logfile, f"Point P: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
+                           f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
 
-    for i in range(10):
-        print(f"\nPoint {i + 1}P = {str(i) if i > 0 else ''}P(X1, Y1) + P(X2, Y2)")
-        print(f"Point X1, Y1: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
-              f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
-        print(f"Point X2, Y2: ({hex(point_x2) if point_x2 is not None else 'Infinity'}, "
-              f"{hex(point_y2) if point_y2 is not None else 'Infinity'})")
-        x3, y3 = elliptic_curve_point_addition_and_doubling(current_x1, current_y1, point_x2, point_y2,
-                                                            prime_p, parameter_a)
-        print(f"Point {i+1}P = Point X3, Y3: ({hex(x3) if x3 is not None else 'Infinity'}, "
-              f"{hex(y3) if y3 is not None else 'Infinity'})")
-        current_x1, current_y1 = x3, y3
+        for i in range(10):
+            log_print(logfile, f"\nPoint {i + 1}P = {str(i) if i > 0 else ''}P(X1, Y1) + P(X2, Y2)")
+            log_print(logfile, f"Point X1, Y1: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
+                               f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
+            log_print(logfile, f"Point X2, Y2: ({hex(point_x2) if point_x2 is not None else 'Infinity'}, "
+                               f"{hex(point_y2) if point_y2 is not None else 'Infinity'})")
+            x3, y3 = elliptic_curve_point_addition_and_doubling(current_x1, current_y1, point_x2, point_y2,
+                                                                prime_p, parameter_a)
+            log_print(logfile, f"Point {i+1}P = Point X3, Y3: ({hex(x3) if x3 is not None else 'Infinity'}, "
+                               f"{hex(y3) if y3 is not None else 'Infinity'})")
+            current_x1, current_y1 = x3, y3
