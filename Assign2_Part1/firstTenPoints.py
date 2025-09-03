@@ -64,14 +64,14 @@ if __name__ == '__main__':
         log_print(logfile, f"Point P: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
                            f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
 
-        for i in range(10):
-            log_print(logfile, f"\nPoint {i + 1}P = {str(i) if i > 0 else ''}P(X1, Y1) + P(X2, Y2)")
-            log_print(logfile, f"Point X1, Y1: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
+        for i in range(9):
+            log_print(logfile, f"\nPoint {i + 2}P = {str(i+1) if i > 0 else ''}P + P")
+            log_print(logfile, f"{str(i+1) if i > 0 else ''}P: ({hex(current_x1) if current_x1 is not None else 'Infinity'}, "
                                f"{hex(current_y1) if current_y1 is not None else 'Infinity'})")
-            log_print(logfile, f"Point X2, Y2: ({hex(point_x2) if point_x2 is not None else 'Infinity'}, "
+            log_print(logfile, f"+P: ({hex(point_x2) if point_x2 is not None else 'Infinity'}, "
                                f"{hex(point_y2) if point_y2 is not None else 'Infinity'})")
             x3, y3 = elliptic_curve_point_addition_and_doubling(current_x1, current_y1, point_x2, point_y2,
                                                                 prime_p, parameter_a, logfile)
-            log_print(logfile, f"Point {i+1}P = Point X3, Y3: ({hex(x3) if x3 is not None else 'Infinity'}, "
+            log_print(logfile, f"Point {i+2}P: ({hex(x3) if x3 is not None else 'Infinity'}, "
                                f"{hex(y3) if y3 is not None else 'Infinity'})")
             current_x1, current_y1 = x3, y3
