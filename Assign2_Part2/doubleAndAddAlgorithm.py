@@ -16,19 +16,19 @@ def double_and_add(x1, y1, num, a, p, log_file):
 
         # Double the current result if it exists
         if result_x is not None and result_y is not None:
-            log_print(log_file, f"Doubling {current_p}P({result_x}, {result_y})")
+            log_print(log_file, f"Doubling {current_p}P({hex(result_x)}, {hex(result_y)})")
             result_x, result_y = elliptic_curve_point_addition_and_doubling(
                 result_x, result_y, result_x, result_y, p, a, log_file)
             current_p *= 2
         else:
             log_print(log_file, "Result is initially point at infinity, no doubling needed.")
-        log_print(log_file, f"{current_p}P: ({result_x}, {result_y})")
+        log_print(log_file, f"{current_p}P: ({hex(result_x) if result_x is not None else None}, {hex(result_y) if result_y is not None else None})")
         # If bit is 1, add the base point
         if bit == '1':
-            log_print(log_file, f"Since bit is 1\n{current_p}P({result_x}, {result_y}) \n+ P({x1}, {y1})")
+            log_print(log_file, f"Since bit is 1\n{current_p}P({hex(result_x) if result_x is not None else None}, {hex(result_y) if result_y is not None else None}) \n+ P({hex(x1)}, {hex(y1)})")
             result_x, result_y = elliptic_curve_point_addition_and_doubling(result_x, result_y, x1, y1, p, a, log_file)
             current_p += 1
-            log_print(log_file, f"{current_p}P: ({result_x}, {result_y})")
+            log_print(log_file, f"{current_p}P: ({hex(result_x)}), {hex(result_y)})")
 
     return result_x, result_y
 
