@@ -28,7 +28,7 @@ def double_and_add(x1, y1, num, a, p, log_file):
             log_print(log_file, f"Since bit is 1\n{current_p}P({hex(result_x) if result_x is not None else None}, {hex(result_y) if result_y is not None else None}) \n+ P({hex(x1)}, {hex(y1)})")
             result_x, result_y = elliptic_curve_point_addition_and_doubling(result_x, result_y, x1, y1, p, a, log_file)
             current_p += 1
-            log_print(log_file, f"{current_p}P: ({hex(result_x)}), {hex(result_y)})")
+            log_print(log_file, f"{current_p}P: ({hex(result_x)}, {hex(result_y)})")
 
     return result_x, result_y
 
@@ -42,10 +42,8 @@ if __name__ == '__main__':
     v. Order (n): Large prime (specified in SEC 2)
     vi. Cofactor: 1
     '''
-    point_x1 = point_x2 = int("04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798"
-                              .replace(" ", ""), 16)
-    point_y1 = point_y2 = int("483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8"
-                              .replace(" ", ""), 16)
+    point_x1 = int("79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798".replace(" ", ""), 16)
+    point_y1 = int("483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8".replace(" ", ""), 16)
     parameter_a = 0
     prime_p = (2**256) - (2**32) - 977
 
