@@ -106,8 +106,8 @@ if __name__ == '__main__':
         log_print(logfile, f"\nGenerating Public Key dG: ")
         public_key = double_and_add(x1, y1, d, a, p, logfile)
         log_print(logfile, f"\nPublic Key (dG): ({hex(public_key[0])}, {hex(public_key[1])})")
-
+        log_print(logfile, f"\nGenerating Signature:")
         sign = signature_generation(x1, y1, 123, a, p, logfile, n, hash_value, d)
-
+        log_print(logfile, f"\nVerifying Signature:")
         signature_verification(a, p, logfile, n, hash_value, sign, x1, y1, public_key)
 
