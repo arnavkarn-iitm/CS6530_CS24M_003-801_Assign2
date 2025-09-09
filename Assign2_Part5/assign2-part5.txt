@@ -4,5 +4,5 @@ File size: 148329 bytes
 Total blocks: 2318
 Ciphertext written to assign2-decrypted.zip
 
-chacha 20 execution Time: 4ms
+chacha 20 execution Time: 3ms
 Output: assign2-decrypted.zip

@@ -182,24 +182,6 @@ File size: 148329 bytes
 Total blocks: 2318
 Ciphertext written to assign2-encrypted.bin
 
-chacha 20 execution Time: 3ms
-Output: assign2-encrypted.bin
-Encrypted file copied to Assign2_part5 directory for decryption.
-
-Compiling and running ChaCha20 encryption program:
-File size: 148329 bytes
-Total blocks: 2318
-Ciphertext written to assign2-encrypted.bin
-
-chacha 20 execution Time: 6ms
-Output: assign2-encrypted.bin
-Encrypted file copied to Assign2_part5 directory for decryption.
-
-Compiling and running ChaCha20 encryption program:
-File size: 148329 bytes
-Total blocks: 2318
-Ciphertext written to assign2-encrypted.bin
-
-chacha 20 execution Time: 3ms
+chacha 20 execution Time: 2ms
 Output: assign2-encrypted.bin
 Encrypted file copied to Assign2_part5 directory for decryption.
