@@ -1,8 +1,0 @@
-
-Compiling and running ChaCha20 decryption program:
-File size: 148329 bytes
-Total blocks: 2318
-Ciphertext written to assign2-decrypted.zip
-
-chacha 20 execution Time: 4ms
-Output: assign2-decrypted.zip
